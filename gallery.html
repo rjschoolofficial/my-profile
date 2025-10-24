@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gallery — Ram Janki Shiksha Niketan</title>
+  <meta name="description" content="Gallery of Ram Janki Shiksha Niketan High School — Photos and Events" />
+  <style>
+    :root {
+      --accent: #0b5ed7;
+      --muted: #6b7280;
+      --bg: #f7fafc;
+      --card: #ffffff;
+      --radius: 12px;
+      font-family: Inter, system-ui, Arial;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: #0f172a;
+      line-height: 1.45;
+    }
+    .wrap {
+      max-width: 1100px;
+      margin: 28px auto;
+      padding: 18px;
+    }
+    h1 {
+      font-size: 22px;
+      margin: 10px 0;
+    }
+    p {
+      color: var(--muted);
+      margin: 0 0 14px 0;
+    }
+    .back {
+      display: inline-block;
+      padding: 8px 12px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .grid img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .grid img:hover {
+      transform: scale(1.04);
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.2);
+    }
+
+    /* Lightbox */
+    #lb {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 1000;
+    }
+    #lb img {
+      max-width: 95%;
+      max-height: 90%;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    }
+
+    @media (max-width: 1000px) {
+      .grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 700px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      .grid img { height: 160px; }
+    }
+    @media (max-width: 420px) {
+      .grid { grid-template-columns: 1fr; }
+      .grid img { height: 200px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a href="index.html" class="back">◀ Back to Home</a>
+    <h1>Gallery — Photos & Events</h1>
+    <p>Click any image below to view in full size.</p>
+
+    <!-- GALLERY GRID -->
+    <div class="grid">
+      <img src="images/gallery1.jpg" alt="Annual Function" onclick="openLightbox(this.src)">
+      <img src="images/gallery2.jpg" alt="Sports Day" onclick="openLightbox(this.src)">
+      <img src="images/gallery3.jpg" alt="Cultural Event" onclick="openLightbox(this.src)">
+      <img src="images/gallery4.jpg" alt="Students Activity" onclick="openLightbox(this.src)">
+      <img src="images/gallery5.jpg" alt="Independence Day Celebration" onclick="openLightbox(this.src)">
+      <img src="images/gallery6.jpg" alt="School Assembly" onclick="openLightbox(this.src)">
+      <img src="images/gallery7.jpg" alt="Tree Plantation" onclick="openLightbox(this.src)">
+      <img src="images/gallery8.jpg" alt="Classroom Learning" onclick="openLightbox(this.src)">
+    </div>
+  </div>
+
+  <!-- LIGHTBOX VIEW -->
+  <div id="lb" onclick="closeLightbox()">
+    <img id="lb-img" src="" alt="Expanded View">
+  </div>
+
+  <script>
+    function openLightbox(src) {
+      const lb = document.getElementById('lb');
+      const img = document.getElementById('lb-img');
+      img.src = src;
+      lb.style.display = 'flex';
+    }
+    function closeLightbox() {
+      document.getElementById('lb').style.display = 'none';
+    }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
+</body>
+</html>
