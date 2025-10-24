@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Faculty — Ram Janki Shiksha Niketan High School</title>
+  <meta name="description" content="Meet our teachers and staff — Ram Janki Shiksha Niketan High School" />
+  <style>
+    :root{
+      --accent:#0b5ed7;
+      --muted:#6b7280;
+      --bg:#f7fafc;
+      --card:#ffffff;
+      --radius:12px;
+      font-family: Inter, system-ui, Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:#0f172a;line-height:1.45}
+    .wrap{max-width:1100px;margin:28px auto;padding:18px}
+    .top{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+    .back{display:inline-block;padding:8px 12px;background:var(--accent);color:#fff;border-radius:8px;text-decoration:none;font-weight:600}
+    h1{margin:8px 0 0;font-size:20px}
+    p.lead{color:var(--muted);margin:6px 0 0}
+
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+    .card{background:var(--card);padding:12px;border-radius:12px;box-shadow:0 6px 18px rgba(15,23,42,0.06);text-align:center;cursor:pointer;transition:transform .12s ease,box-shadow .12s ease}
+    .card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(15,23,42,0.12)}
+    .card img{width:100%;height:180px;object-fit:cover;border-radius:8px}
+    .card strong{display:block;margin-top:10px}
+    .role{color:var(--muted);font-size:13px;margin-top:6px}
+
+    /* modal */
+    .modal-back{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);align-items:center;justify-content:center;padding:16px;z-index:999}
+    .modal{width:100%;max-width:520px;background:var(--card);padding:18px;border-radius:12px;box-shadow:0 18px 40px rgba(15,23,42,0.3)}
+    .modal h3{margin:0 0 6px}
+    .modal .meta{color:var(--muted);font-size:14px;margin-bottom:10px}
+    .modal .info{margin-top:8px;font-size:15px}
+    .modal .actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
+    .btn{background:var(--accent);color:#fff;padding:8px 12px;border-radius:8px;text-decoration:none;font-weight:600;border:0;cursor:pointer}
+    .btn.ghost{background:transparent;color:var(--muted);box-shadow:none;border:1px solid #e6edf8}
+
+    @media (max-width:880px){ .grid{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width:520px){ .grid{grid-template-columns:1fr} .card img{height:200px} .top{gap:8px} }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <a class="back" href="index.html">◀ Back to Home</a>
+      <div style="text-align:center;flex:1">
+        <h1>Our Faculty & Staff</h1>
+        <p class="lead">Click any staff card to view contact details.</p>
+      </div>
+      <a class="back" href="schooldetail.html" style="background:#0f766e">About School</a>
+    </div>
+
+    <div class="grid" aria-live="polite">
+      <!-- Card: Virendra Kumar Puri -->
+      <div class="card"
+           onclick="showDetail('Virendra Kumar Puri','Principal / School Manager','7205535470','krvirenpuri@gmail.com','images/staff1.jpg')">
+        <img src="images/staff1.jpg" alt="Virendra Kumar Puri">
+        <strong>Virendra Kumar Puri</strong>
+        <div class="role">Principal / School Manager</div>
+      </div>
+
+      <!-- Card: Neha Kumari -->
+      <div class="card"
+           onclick="showDetail('Neha Kumari','Secretary','[mobile]','[email]','images/staff2.jpg')">
+        <img src="images/staff2.jpg" alt="Neha Kumari">
+        <strong>Neha Kumari</strong>
+        <div class="role">Secretary</div>
+      </div>
+
+      <!-- Card: Mukesh Giri -->
+      <div class="card"
+           onclick="showDetail('Mukesh Giri','Treasurer / Teacher','[mobile]','[email]','images/staff3.jpg')">
+        <img src="images/staff3.jpg" alt="Mukesh Giri">
+        <strong>Mukesh Giri</strong>
+        <div class="role">Treasurer / Teacher</div>
+      </div>
+
+      <!-- Card: Bablu Puri -->
+      <div class="card"
+           onclick="showDetail('Bablu Puri','Trustee / Staff','[mobile]','[email]','images/staff4.jpg')">
+        <img src="images/staff4.jpg" alt="Bablu Puri">
+        <strong>Bablu Puri</strong>
+        <div class="role">Trustee / Staff</div>
+      </div>
+
+      <!-- ✅ Dummy Card: Virendra Kumar -->
+      <div class="card"
+           onclick="showDetail('Virendra Kumar','TGT (English)','9876543210','virendra.kumar@example.com','images/staff7.jpg')">
+        <img src="images/staff7.jpg" alt="Virendra Kumar">
+        <strong>Virendra Kumar</strong>
+        <div class="role">TGT (English)</div>
+      </div>
+
+      <!-- Example additional -->
+      <div class="card"
+           onclick="showDetail('A. Teacher','Primary Teacher','[mobile]','[email]','images/staff6.jpg')">
+        <img src="images/staff6.jpg" alt="A. Teacher">
+        <strong>A. Teacher</strong>
+        <div class="role">Primary Teacher</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="modalBack" class="modal-back" onclick="closeModal()">
+    <div class="modal" onclick="event.stopPropagation()">
+      <div style="display:flex;gap:12px;align-items:center">
+        <img id="md-img" src="images/staff1.jpg" alt="" style="width:84px;height:84px;object-fit:cover;border-radius:8px">
+        <div style="flex:1">
+          <h3 id="md-name">Name Here</h3>
+          <div id="md-role" class="meta">Role / Designation</div>
+        </div>
+      </div>
+      <div class="info">
+        <div><strong>Phone:</strong> <a id="md-phone" href="#">[phone]</a></div>
+        <div style="margin-top:8px"><strong>Email:</strong> <a id="md-email" href="#">[email]</a></div>
+      </div>
+      <div class="actions">
+        <a id="callBtn" class="btn" href="#">Call</a>
+        <button class="btn ghost" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showDetail(name, role, phone, email, imgSrc){
+      document.getElementById('md-name').textContent = name;
+      document.getElementById('md-role').textContent = role;
+      document.getElementById('md-img').src = imgSrc || 'images/staff-placeholder.png';
+      document.getElementById('md-phone').textContent = phone;
+      document.getElementById('md-email').textContent = email;
+      document.getElementById('md-phone').href = 'tel:' + phone;
+      document.getElementById('md-email').href = 'mailto:' + email;
+      document.getElementById('callBtn').href = 'tel:' + phone;
+      document.getElementById('modalBack').style.display = 'flex';
+    }
+    function closeModal(){ document.getElementById('modalBack').style.display = 'none'; }
+    document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+  </script>
+</body>
+</html>
