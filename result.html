@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Results — Ram Janki Shiksha Niketan</title>
+  <style>
+    :root{
+      --bg:#f3f7fb;
+      --card:#ffffff;
+      --text:#0f172a;
+      --muted:#6b7280;
+      --accent:#0b5ed7;
+      --radius:12px;
+      --maxw:980px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      padding:28px 16px;
+    }
+    .wrap{
+      max-width:var(--maxw);
+      margin:0 auto;
+    }
+
+    .header{
+      background: linear-gradient(180deg, rgba(11,94,215,0.06), rgba(255,255,255,0.6));
+      padding:18px 22px;
+      border-radius:14px;
+      display:flex;
+      gap:16px;
+      align-items:center;
+      box-shadow:0 8px 20px rgba(15,23,42,0.04);
+    }
+    .logo {
+      width:72px;height:72px;border-radius:50%;overflow:hidden;flex-shrink:0;background:#fff;display:flex;align-items:center;justify-content:center;
+      box-shadow:0 6px 18px rgba(15,23,42,0.03);
+    }
+    .logo img{width:64px;height:64px;object-fit:cover}
+    .header h1{margin:0;font-size:20px;letter-spacing:.2px}
+    .header .lead{color:var(--muted);font-size:13px;margin-top:6px}
+
+    .back-row{display:flex;align-items:center;gap:10px;margin:18px 0}
+    .btn{
+      display:inline-block;padding:8px 14px;border-radius:10px;text-decoration:none;font-weight:600;font-size:14px;
+      color:#fff;background:var(--accent);box-shadow:0 6px 14px rgba(11,94,215,0.12)
+    }
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow:0 10px 26px rgba(15,23,42,0.05);
+    }
+
+    /* Controls */
+    .controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+    select, button.search{
+      padding:10px 12px;border-radius:10px;border:1px solid rgba(15,23,42,0.06);font-size:15px;background:#fff;
+    }
+    button.search{
+      background:var(--accent);color:#fff;border:0;
+      cursor:pointer;font-weight:700;
+    }
+
+    /* Result display */
+    .result-area{margin-top:18px;display:grid;gap:12px}
+    .result-card{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px;border-radius:12px;background:#fbfdff;border:1px solid rgba(11,94,215,0.06)
+    }
+    .result-left{display:flex;gap:12px;align-items:center}
+    .result-left .icon{
+      width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:28px;background:#eaf3ff;color:var(--accent)
+    }
+    .result-meta h3{margin:0;font-size:16px}
+    .result-meta p{margin:4px 0 0;color:var(--muted);font-size:14px}
+
+    .result-actions{display:flex;gap:10px;align-items:center}
+    .download{
+      display:inline-block;padding:10px 14px;border-radius:12px;background:transparent;border:2px solid var(--accent);color:var(--accent);
+      text-decoration:none;font-weight:700;
+    }
+    .preview{
+      padding:10px 14px;border-radius:12px;background:var(--accent);color:#fff;text-decoration:none;font-weight:700;
+    }
+
+    .hint{color:var(--muted);font-size:14px;margin-top:8px}
+
+    /* iframe preview */
+    .pdf-preview{
+      margin-top:12px;border-radius:10px;overflow:hidden;border:1px solid rgba(15,23,42,0.04);
+    }
+    .pdf-preview iframe{width:100%;height:560px;border:0;display:block}
+
+    @media(max-width:720px){
+      .header{padding:14px}
+      .result-card{flex-direction:column;align-items:flex-start}
+      .result-actions{width:100%;justify-content:flex-start}
+      .pdf-preview iframe{height:420px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="header" role="banner" aria-label="Page header">
+      <div class="logo" aria-hidden="true">
+        <img src="images/logo.png" alt="RJ Logo">
+      </div>
+      <div>
+        <h1>Results — Ram Janki Shiksha Niketan High School</h1>
+        <div class="lead">Select class to view the exam result PDF (downloadable from GitHub docs folder).</div>
+      </div>
+      <div style="margin-left:auto">
+        <a class="btn" href="index.html">◀ Back to Dashboard</a>
+      </div>
+    </div>
+
+    <div style="height:18px"></div>
+
+    <div class="card" aria-labelledby="results-controls">
+      <div id="results-controls" style="display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+          <div class="controls" aria-label="Select class">
+            <label for="class-select" style="font-weight:700;color:var(--muted);font-size:14px">Choose class:</label>
+            <select id="class-select" aria-label="Select class">
+              <option value="">-- Select class --</option>
+              <option value="class8">Class 8</option>
+              <option value="class9">Class 9</option>
+              <option value="class10">Class 10</option>
+            </select>
+            <button id="show-btn" class="search" type="button">Show Result</button>
+          </div>
+
+          <div style="color:var(--muted);font-size:14px">
+            <strong>Note:</strong> PDFs served from your GitHub Pages `docs/` folder.
+          </div>
+        </div>
+
+        <div id="result-area" class="result-area" aria-live="polite">
+          <!-- JS will inject result card here -->
+          <div class="hint">Select a class and click <strong>Show Result</strong> to view or download the PDF.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Example optional fallback preview container -->
+    <div id="preview-wrap" class="pdf-preview" hidden>
+      <iframe id="pdf-frame" src="" title="Result preview"></iframe>
+    </div>
+  </div>
+
+  <script>
+    // ======= CONFIG: change this to your GitHub Pages base URL =======
+    // Using raw.githubusercontent.com pattern for direct file links in the repo:
+    const BASE_URL = 'https://raw.githubusercontent.com/rjschoolofficial/my-profile/main/docs/';
+
+    // Filenames expected inside docs/
+    const FILES = {
+      class8: '2026-class8-results.pdf',
+      class9: '2026-class9-results.pdf',
+      class10: '2026-class10-results.pdf'
+    };
+
+    // Elements
+    const selectEl = document.getElementById('class-select');
+    const showBtn = document.getElementById('show-btn');
+    const resultArea = document.getElementById('result-area');
+    const previewWrap = document.getElementById('preview-wrap');
+    const pdfFrame = document.getElementById('pdf-frame');
+
+    // Utility: build full URL
+    function buildUrl(filename){
+      // ensure trailing slash
+      const base = BASE_URL.endsWith('/') ? BASE_URL : BASE_URL + '/';
+      return base + filename;
+    }
+
+    // Render result card for selected class
+    function renderResult(key){
+      resultArea.innerHTML = '';
+      if(!key){
+        const hint = document.createElement('div');
+        hint.className = 'hint';
+        hint.textContent = 'Select a class and click "Show Result" to view or download the PDF.';
+        resultArea.appendChild(hint);
+        previewWrap.hidden = true;
+        pdfFrame.src = '';
+        return;
+      }
+
+      const filename = FILES[key];
+      const url = buildUrl(filename);
+
+      // Card
+      const c = document.createElement('div');
+      c.className = 'result-card';
+      c.setAttribute('role','region');
+      c.setAttribute('aria-label','Result for ' + key);
+
+      // Left
+      const left = document.createElement('div');
+      left.className = 'result-left';
+
+      const ico = document.createElement('div');
+      ico.className = 'icon';
+      ico.textContent = '🎓';
+
+      const meta = document.createElement('div');
+      meta.className = 'result-meta';
+
+      const title = document.createElement('h3');
+      title.textContent = (key === 'class8' ? 'Class 8 Results' : key === 'class9' ? 'Class 9 Results' : 'Class 10 Results');
+
+      const desc = document.createElement('p');
+      desc.textContent = 'Downloadable PDF hosted in docs/ folder on GitHub Pages.';
+
+      meta.appendChild(title);
+      meta.appendChild(desc);
+
+      left.appendChild(ico);
+      left.appendChild(meta);
+
+      // Right: actions
+      const right = document.createElement('div');
+      right.className = 'result-actions';
+
+      const downloadLink = document.createElement('a');
+      downloadLink.className = 'download';
+      downloadLink.href = url;
+      downloadLink.target = '_blank';
+      downloadLink.rel = 'noopener';
+      downloadLink.setAttribute('download','');
+      downloadLink.textContent = 'Download PDF';
+
+      const previewBtn = document.createElement('button');
+      previewBtn.className = 'preview';
+      previewBtn.type = 'button';
+      previewBtn.textContent = 'Preview';
+
+      // preview behavior: set iframe src and show preview
+      previewBtn.addEventListener('click', ()=>{
+        pdfFrame.src = url;
+        previewWrap.hidden = false;
+        // scroll into view for mobile
+        previewWrap.scrollIntoView({behavior:'smooth', block:'start'});
+      });
+
+      right.appendChild(downloadLink);
+      right.appendChild(previewBtn);
+
+      c.appendChild(left);
+      c.appendChild(right);
+
+      resultArea.appendChild(c);
+
+      // small note + direct link visibility
+      const note = document.createElement('div');
+      note.className = 'hint';
+      note.innerHTML = `Direct file: <code>${url}</code>`;
+      resultArea.appendChild(note);
+    }
+
+    // Basic existence check (attempt HEAD fetch) to warn if file missing.
+    // Note: may be blocked by CORS on raw.githubusercontent.com; using GitHub Pages (your username.github.io) typically works.
+    async function checkAndRender(key){
+      if(!key){ renderResult(null); return; }
+      const filename = FILES[key];
+      const url = buildUrl(filename);
+
+      // optimistic render immediately (fast UX)
+      renderResult(key);
+
+      // then do a HEAD check to inform user if file returns 404 (silent failure won't break)
+      try{
+        const res = await fetch(url, { method: 'HEAD' });
+        if(!res.ok){
+          // show message under result card
+          const err = document.createElement('div');
+          err.className = 'hint';
+          err.style.color = '#b45309';
+          err.innerHTML = `File not found at <code>${url}</code>. <strong>Please upload the PDF to your repo's <code>docs/${filename}</code></strong> or update <code>BASE_URL</code> in the script.`;
+          resultArea.appendChild(err);
+          previewWrap.hidden = true;
+        }
+      }catch(e){
+        // fetch may fail (CORS or network) — show gentle hint
+        const err = document.createElement('div');
+        err.className = 'hint';
+        err.style.color = '#b45309';
+        err.textContent = 'Unable to verify file existence due to network/CORS restrictions. If download fails, check your BASE_URL and that the file is present in the docs/ folder.';
+        resultArea.appendChild(err);
+      }
+    }
+
+    // Events
+    showBtn.addEventListener('click', ()=>{
+      const key = selectEl.value;
+      if(!key){
+        selectEl.focus();
+        return;
+      }
+      checkAndRender(key);
+    });
+
+    // Show result when user presses Enter while dropdown focused (optional)
+    selectEl.addEventListener('keydown', (e)=>{ if(e.key === 'Enter') showBtn.click(); });
+
+    // initial hint
+    renderResult(null);
+  </script>
+</body>
+</html>
