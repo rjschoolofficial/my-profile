@@ -5,71 +5,207 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>About — Ram Janki Shiksha Niketan</title>
   <style>
-    body{font-family:Inter,Arial;background:#f7fafc;color:#0f172a;margin:0}
-    .wrap{max-width:900px;margin:28px auto;padding:18px}
-    header{display:flex;align-items:center;gap:14px}
-    header img{width:72px;height:72px;border-radius:50%}
-    h1{margin:8px 0}
-    .lead{color:#6b7280}
-    .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:18px}
-    .card{background:#fff;padding:14px;border-radius:10px;box-shadow:0 6px 18px rgba(15,23,42,0.04)}
-    ul{margin:8px 0 0 18px;color:#374151}
-    a.back{display:inline-block;margin-top:18px;padding:8px 12px;background:#0b5ed7;color:#fff;border-radius:8px;text-decoration:none}
-    @media(max-width:640px){.cards{grid-template-columns:1fr}}
+    :root{
+      --bg: #f3f7fb;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted:#6b7280;
+      --accent:#0b5ed7;
+      --radius:12px;
+      --maxw:980px;
+      --gap:18px;
+      --line:1.65;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:var(--line);
+      padding:28px 16px;
+    }
+
+    .wrap{
+      max-width:var(--maxw);
+      margin:0 auto;
+      background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.9));
+      padding:28px;
+      border-radius:16px;
+      box-shadow:0 8px 30px rgba(15,23,42,0.06);
+    }
+
+    .top-row{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      margin-bottom:6px;
+    }
+
+    .logo{
+      width:88px;
+      height:88px;
+      border-radius:50%;
+      overflow:hidden;
+      flex:0 0 88px;
+      background:#fff;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:0 6px 18px rgba(15,23,42,0.03);
+    }
+    .logo img{width:78px;height:78px;object-fit:cover;display:block}
+
+    header h1{
+      margin:0 0 6px 0;
+      font-size:26px;
+      line-height:1.05;
+      letter-spacing:-0.2px;
+    }
+
+    .lead{
+      color:var(--muted);
+      font-size:14px;
+      margin-top:2px;
+    }
+
+    .meta-actions{
+      margin-left:auto;
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+
+    .btn{
+      display:inline-block;
+      padding:8px 14px;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:600;
+      font-size:14px;
+      border:0;
+      cursor:pointer;
+    }
+    .btn.back{
+      background:var(--accent);
+      color:#fff;
+      box-shadow:0 6px 14px rgba(11,94,215,0.12);
+    }
+    .btn.secondary{
+      background:transparent;
+      color:var(--accent);
+      border:1px solid rgba(11,94,215,0.12);
+    }
+
+    main{
+      margin-top:22px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:var(--gap);
+    }
+
+    .card{
+      background:var(--card);
+      padding:20px;
+      border-radius:var(--radius);
+      box-shadow:0 6px 18px rgba(15,23,42,0.04);
+    }
+
+    h2{
+      margin:0 0 10px 0;
+      font-size:20px;
+      color:var(--text);
+    }
+
+    p{margin:0 0 14px 0}
+    ul{margin:8px 0 14px 20px;color:#374151}
+    li{margin:8px 0}
+
+    .section-row{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .muted{color:var(--muted);font-size:14px}
+
+    @media (max-width:880px){
+      header h1{font-size:22px}
+      .section-row{grid-template-columns:1fr}
+      .logo{width:72px;height:72px;flex:0 0 72px}
+    }
+
+    @media (max-width:520px){
+      body{padding:18px 12px}
+      .wrap{padding:16px;border-radius:12px}
+      header h1{font-size:20px}
+      .btn{padding:8px 12px;font-size:13px;border-radius:9px}
+    }
+
+    /* Accessibility focus */
+    a:focus, button:focus {outline:3px solid rgba(11,94,215,0.18); outline-offset:3px}
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <a href="index.html" class="back" style="font-size:12px;">◀ Go Back</a>
-    <header>
-      <img src="images/logo.png" alt="logo">
+  <div class="wrap" role="main">
+    <div class="top-row" role="banner" aria-label="Page header">
+      <div class="logo" aria-hidden="true">
+        <img src="images/logo.png" alt="RJ Logo">
+      </div>
+
       <div>
-        <h1>About Ram Janki Shiksha Niketan High School</h1>
-        <div class="lead">Vill + P.O–Mahadeo Chaigri, P.S–Bharno, Dist–Gumla, Jharkhand — 835203</div>
-      </div>
-    </header>
-
-    <section style="margin-top:18px">
-      <h2>Vision</h2>
-      <p>To provide quality education rooted in local culture, empowering children of Gumla district to become responsible, creative, and skilled citizens.</p>
-
-      <h2 style="margin-top:12px">Mission</h2>
-      <ul>
-        <li>Deliver a strong academic foundation with emphasis on moral values.</li>
-        <li>Create safe, inclusive learning spaces for all students.</li>
-        <li>Foster arts, sports and vocational skills alongside academics.</li>
-      </ul>
-    </section>
-
-    <section style="margin-top:18px">
-      <h2>Campus & Facilities</h2>
-      <div class="cards">
-        <div class="card">
-          <h3>Classrooms & Labs</h3>
-          <p>Well-ventilated classrooms, basic science lab, and a small library with learning materials.</p>
-        </div>
-        <div class="card">
-          <h3>Playground & Sports</h3>
-          <p>Open ground for sports and physical activities.</p>
-        </div>
-        <div class="card">
-          <h3>Sanitation & Safety</h3>
-          <p>Separate restrooms for boys/girls and first-aid facilities.</p>
-        </div>
-        <div class="card">
-          <h3>Community Programs</h3>
-          <p>Events, cultural programs, and local skill-building workshops.</p>
+        <header>
+          <h1>About Ram Janki Shiksha Niketan High School</h1>
+        </header>
+        <div class="lead">
+          Vill + P.O–Mahadeo Chaigri, P.S–Bharno, Dist–Gumla, Jharkhand — 835203
         </div>
       </div>
-    </section>
 
-    <section style="margin-top:18px">
-      <h2>How to Reach</h2>
-      <p>Nearest town: Gumla. For official visits, contact Trust at <a href="mailto:trust.rjsn.gumla@gmail.com">trust.rjsn.gumla@gmail.com</a> or call the school manager.</p>
-    </section>
-    <a href="index.html" class="back" style="font-size:12px;">◀ Go Back</a>
+      <div class="meta-actions" aria-hidden="false">
+        <a class="btn back" href="index.html">◀ Go Back</a>
+        <a class="btn secondary" href="donate.html">Support Us</a>
+      </div>
+    </div>
+
+    <main>
+      <section class="card" aria-labelledby="vision-heading">
+        <h2><span class="icon">⚡</span>Vision</h2>
+        <p>To provide quality education rooted in local culture, empowering children of Gumla district to become responsible, creative, and skilled citizens.</p>
+      </section>
+
+      <section class="card" aria-labelledby="mission-heading">
+        <h2><span class="icon">🎯</span>Mission</h2>
+        <ul>
+          <li>Deliver a strong academic foundation with emphasis on moral values.</li>
+          <li>Create safe, inclusive learning spaces for all students.</li>
+          <li>Foster arts, sports and vocational skills alongside academics.</li>
+          <li>Well-ventilated classrooms, basic science lab, and a small library with learning materials.</li>
+        </ul>
+      </section>
+
+      <section class="card" aria-labelledby="campus-heading">
+        <h2><span class="icon">🏫</span>Campus & Facilities</h2>
+        <ul>
+          <li>Open ground for sports and physical activities.</li>
+          <li>Separate restrooms for boys/girls and first-aid facilities.</li>
+          <li>Events, cultural programs, and local skill-building workshops.</li>
+        </ul>
+      </section>
+
+      <section class="card" aria-labelledby="reach-heading">
+        <h2><span class="icon">📍</span>How to Reach Us</h2>
+        <p class="muted">Nearest town: Bharno (Gumla).</p>
+        <p>For official visits or inquiries, contact Trust at
+          <a href="mailto:trust.rjsn.gumla@gmail.com">trust.rjsn.gumla@gmail.com</a>
+          or call the Director/Chairman.
+        </p>
+      </section>
+    </main>
+
+    <div style="margin-top:18px; display:flex; gap:10px; justify-content:flex-start;">
+      <a class="btn back" href="index.html">◀ Go Back</a>
+      <a class="btn secondary" href="donate.html">Support Us</a>
+    </div>
   </div>
 </body>
-
 </html>
-
