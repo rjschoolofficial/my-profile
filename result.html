@@ -111,11 +111,11 @@
         <img src="images/logo.png" alt="RJ Logo">
       </div>
       <div>
-        <h1>Results — Ram Janki Shiksha Niketan High School</h1>
-        <div class="lead">Select class to view the exam result PDF (downloadable from GitHub docs folder).</div>
+        <h1> Academic Results </h1>
+        <div class="lead">Select class to view the exam result.</div>
       </div>
       <div style="margin-left:auto">
-        <a class="btn" href="index.html">◀ Back to Dashboard</a>
+        <a class="btn" href="index.html">◀ Go Back</a>
       </div>
     </div>
 
@@ -136,13 +136,13 @@
           </div>
 
           <div style="color:var(--muted);font-size:14px">
-            <strong>Note:</strong> PDFs served from your GitHub Pages `docs/` folder.
+            <strong>Note:</strong> All the best for the Result.
           </div>
         </div>
 
         <div id="result-area" class="result-area" aria-live="polite">
           <!-- JS will inject result card here -->
-          <div class="hint">Select a class and click <strong>Show Result</strong> to view or download the PDF.</div>
+          <div class="hint">Select a class and click <strong>Show Result</strong> to view or download.</div>
         </div>
 
       </div>
@@ -186,7 +186,7 @@
       if(!key){
         const hint = document.createElement('div');
         hint.className = 'hint';
-        hint.textContent = 'Select a class and click "Show Result" to view or download the PDF.';
+        hint.textContent = 'Select a class and click "Show Result" to view or download.';
         resultArea.appendChild(hint);
         previewWrap.hidden = true;
         pdfFrame.src = '';
@@ -315,3 +315,4 @@
   </script>
 </body>
 </html>
+
